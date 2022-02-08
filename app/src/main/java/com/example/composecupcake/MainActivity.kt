@@ -3,6 +3,7 @@ package com.example.composecupcake
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -22,24 +23,31 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    MessageCard(
+                        msg = Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!")
+                    )
                 }
             }
         }
     }
 }
 
+data class Message(val author:String, val body:String)
+
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MessageCard(msg: Message) {
+    Column{
+        Text(text = msg.author)
+        Text(text = msg.body)
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    ComposeCupcakeTheme {
-        Greeting("Android")
-    }
+fun PreviewMessageCard() {
+    MessageCard(
+        msg = Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!")
+    )
 }
 
 //https://www.jetpackcompose.app/What-is-the-equivalent-of-ScrollView-in-Jetpack-Compose
